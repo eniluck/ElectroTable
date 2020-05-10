@@ -142,11 +142,6 @@ namespace ElectroTable
             //если уже вычислено, то возвращаемся
             if (cell.IsCalulated)
                 return;
-            /*
-            //если ещё не очищены ссылки, то очищаем
-            if (!cell.IsCleared)
-                ReplaceCellReferences(cell);
-            */
 
             //вычисляем значение
             cell.Value = RPN.Calculate(cell.ClearData);

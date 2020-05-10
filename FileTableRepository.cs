@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ElectroTable
 {
@@ -15,7 +14,6 @@ namespace ElectroTable
         private const string outFilename = "out.txt";
         //Разделитель в файле
         private readonly char separator;
-        //private readonly string fileOutName;
 
         public FileTableRepository(string directory, char separator)
         {
@@ -39,10 +37,10 @@ namespace ElectroTable
         }
 
         /// <summary>
-        /// Массив ячеек из строк
+        /// Метод создает зубчатый массив ячеек из массива строк
         /// </summary>
-        /// <param name="lines"></param>
-        /// <returns></returns>
+        /// <param name="lines">Массив строк</param>
+        /// <returns>Массив ячеек</returns>
         private Cell[][] LinesToArray(string[] lines)
         {
             int n = lines.Count();
@@ -56,6 +54,11 @@ namespace ElectroTable
             return resultArray;
         }
 
+        /// <summary>
+        /// Метод создает массив ячеек из строки
+        /// </summary>
+        /// <param name="line">строка</param>
+        /// <returns>Массив ячеек</returns>
         private Cell[] LineToCells(string line)
         {
             string[] stringArray = line.Split(separator);
@@ -69,6 +72,11 @@ namespace ElectroTable
             return cells;
         }
 
+        /// <summary>
+        /// Метод сохраняет в файл массив ячеек
+        /// </summary>
+        /// <param name="table">Массив ячеек</param>
+        /// <returns>Удачно ли сохранение</returns>
         public bool SaveAll(Cell[][] table)
         {
             List<string> allLines = getLines(table);
@@ -83,6 +91,11 @@ namespace ElectroTable
             return true;
         }
 
+        /// <summary>
+        /// Сохраняет массив ячеек в массив строк с разделителем
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
         private List<string> getLines(Cell[][] table)
         {
             List<string> allLines = new List<string>();
@@ -93,7 +106,7 @@ namespace ElectroTable
                 {
                     sbLine.Append(table[i][j].Value);
                     if (j != table[i].Length - 1)
-                        sbLine.Append(" ,");
+                        sbLine.Append($" {separator}");
                 }
                 allLines.Add(sbLine.ToString());
             }
